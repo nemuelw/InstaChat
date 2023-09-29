@@ -42,10 +42,10 @@ const Chat = () => {
             <p className='text-green bg-white p-3 rounded-lg'>Active Users</p>
             <ul className='mt-2 text-white absolute right-3 px-4 py-2 overflow-y-auto border-l'>
                 {
-                    userList.map((user) => {
+                    userList.map((user, index) => {
                         return (
                             <>
-                                <li className='text-xl'>{user === username ? `${user}(You)` : user}</li>
+                                <li key={index} className='text-xl'>{user === username ? `${user}(You)` : user}</li>
                                 <hr />
                             </>
                         )

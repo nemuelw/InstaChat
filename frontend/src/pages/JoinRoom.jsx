@@ -10,7 +10,6 @@ const JoinRoom = () => {
 
   const handleJoinRoom = (e) => {
     e.preventDefault()
-    console.log(username, room)
     socket.emit('joinRoom', {username, room})
     navigate(`/chat/${username}/${room}`)
   }
