@@ -17,7 +17,7 @@ const JoinRoom = () => {
 
   return (
     <div className='flex items-center justify-center h-screen'>
-      <div className='bg-purple-900 rounded-md p-3 text-white text-center w-1/3'>
+      <div className='bg-purple-500 rounded-md p-3 text-white text-center w-1/3'>
         <p className='mb-3 text-2xl'>InstaChat</p>
         <form className='w-full' onSubmit={handleJoinRoom}>
           <input 
