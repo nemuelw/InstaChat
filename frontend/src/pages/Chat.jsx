@@ -14,47 +14,7 @@ const Chat = () => {
     {
         username: 'admin',
         message: 'hello friend'
-    },
-    {
-        username: 'user3',
-        message: 'hello friend'
-    },
-    {
-        username: 'user1',
-        message: 'hola friend'
-    },
-    {
-        username: 'admin',
-        message: 'hello friend'
-    },
-    {
-        username: 'user3',
-        message: 'hello friend'
-    },
-    {
-        username: 'user1',
-        message: 'hola friend'
-    },
-    {
-        username: 'admin',
-        message: 'hello friend'
-    },
-    {
-        username: 'user3',
-        message: 'hello friend'
-    },
-    {
-        username: 'user1',
-        message: 'hola friend'
-    },
-    {
-        username: 'admin',
-        message: 'hello friend'
-    },
-    {
-        username: 'user3',
-        message: 'hello friend'
-    },
+    }
   ])
   const [userList, setUserList] = useState(['user1', 'user2'])
   const [message, setMessage] = useState('')
@@ -85,7 +45,7 @@ const Chat = () => {
                     userList.map((user) => {
                         return (
                             <>
-                                <li className='text-xl'>{user}</li>
+                                <li className='text-xl'>{user === username ? `${user}(You)` : user}</li>
                                 <hr />
                             </>
                         )
