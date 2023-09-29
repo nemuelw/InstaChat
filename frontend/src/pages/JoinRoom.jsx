@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
+import io from 'socket.io-client'
+import { useNavigate } from 'react-router-dom'
 
 const JoinRoom = () => {
   const [username, setUsername] = useState('')
   const [room, setRoom] = useState('')
+  const navigate = useNavigate()
+  const socket = io.connect('http://localhost:1234')
 
   const handleJoinRoom = (e) => {
     e.preventDefault()
     console.log(username, room)
+    socket.emit('joinRoom', {username, room})
+    navigate(`/chat/${username}/${room}`)
   }
 
   return (
