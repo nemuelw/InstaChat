@@ -2,16 +2,11 @@ import React, { useState } from 'react'
 
 const JoinRoom = () => {
   const [username, setUsername] = useState('')
-  const [msg, setMsg] = useState('')
   const [room, setRoom] = useState('')
 
-  const handleUsername = async(username) => {
-
-  }
-
-  const handleJoinRoom = async(e) => {
-    e.preventDefault();
-    
+  const handleJoinRoom = (e) => {
+    e.preventDefault()
+    console.log(username, room)
   }
 
   return (
@@ -21,23 +16,20 @@ const JoinRoom = () => {
         <form className='w-full' onSubmit={handleJoinRoom}>
           <input 
             type="text"
-            className='w-full p-3 rounded-lg text-black mb-5'
+            className='w-full p-3 rounded-lg text-black mb-5 focus:outline-none'
             placeholder='Username'
-            onChange={(e) => handleUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
           <select
             className='w-full px-3 py-4 rounded-lg text-black mb-5'
+            onChange={(e) => setRoom(e.target.value)}
             required
           >
-            <option>Select Room</option>
+            <option value=''>Select Room to Join</option>
             <option value='room_1'>Room 1</option>
             <option value='room_2'>Room 2</option>
-            <option value='room_3'>Room 3</option>
-            <option value='room_4'>Room 4</option>
-            <option value='room_5'>Room 5</option>
           </select>
-
           <input 
             type='submit'
             value='Join Chatroom'
