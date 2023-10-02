@@ -1,39 +1,66 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import io from 'socket.io-client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const Chat = () => {
   const {username, room} = useParams()
-  const [messages, setMessages] = useState([
-    {
-        username: 'user1',
-        message: 'hola friend'
-    },
-    {
-        username: 'admin',
-        message: 'hello friend'
-    }
-  ])
-  const [userList, setUserList] = useState(['user1', 'user2'])
+  const [messages, setMessages] = useState([])
+  const [userList, setUserList] = useState([])
+  const [newUser, setNewUser] = useState([])
   const [message, setMessage] = useState('')
+  const navigate = useNavigate()
   const socket = io.connect('http://localhost:1234')
 
   const handleSendMessage = (e) => {
     e.preventDefault()
-    alert(message)
+    console.log('username', username)
+    socket.emit('chatMessage', {message, room, username})
+    console.log('hello friend')
+    setMessage('')
+  }
+
+  const handleLeaveRoom = () => {
+    navigate('/')
+    window.location.reload()
   }
 
   useEffect(() => {
-    socket.on('newMessage', ({message, username}) => {
-        setMessages([...messages, {message, username}])
+    socket.on('connect', () => {
+      console.log('Client connected')
     })
+  }, [socket])
 
-    socket.on('userList', ({users}) => {
-        setUserList(users)
+  useEffect(() => {
+    socket.on('newMessage', ({message, username}) => {
+      console.log('hello friend !!!!')
+      setMessages(prevMessages => [...prevMessages, {message,username}])
+      alert(message, username)
     })
-  }, [messages,userList, socket])
+  }, [socket])
+
+  useEffect(() => {
+    socket.on('newUser', ({username}) => {
+      console.log(username, 'joined')
+      setNewUser(username)
+      alert(newUser)
+    })
+  }, [socket, newUser])
+
+  useEffect(() => {
+    socket.on('userList', ({users}) => {
+      setUserList(users)
+    })
+  }, [socket])
+
+  useEffect(() => {
+      socket.on('hello', () => {
+          alert('Greetings received')
+      })
+  }, [socket])
+
 
   return (
     <div className='flex items-center justify-center h-screen'>
@@ -53,6 +80,7 @@ const Chat = () => {
                 }
             </ul>
             <button
+                onClick={handleLeaveRoom}
                 className='bg-red-700 absolute bottom-3 left-3 text-white p-3 rounded-lg w-[90%]'
             >
                 Leave
