@@ -35,9 +35,7 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on('newMessage', ({message, username}) => {
-      console.log('hello friend !!!!')
       setMessages(prevMessages => [...prevMessages, {message,username}])
-      alert(message, username)
     })
   }, [socket])
 
@@ -45,7 +43,6 @@ const Chat = () => {
     socket.on('newUser', ({username}) => {
       console.log(username, 'joined')
       setNewUser(username)
-      alert(newUser)
     })
   }, [socket, newUser])
 
@@ -53,12 +50,6 @@ const Chat = () => {
     socket.on('userList', ({users}) => {
       setUserList(users)
     })
-  }, [socket])
-
-  useEffect(() => {
-      socket.on('hello', () => {
-          alert('Greetings received')
-      })
   }, [socket])
 
   return (
