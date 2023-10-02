@@ -61,7 +61,6 @@ const Chat = () => {
       })
   }, [socket])
 
-
   return (
     <div className='flex items-center justify-center h-screen'>
       <div className='p-5 rounded-md border border-blue-900 h-[500px] w-1/2 flex shadow-2xl'>

@@ -19,20 +19,16 @@ const rooms = {
 io.on('connection', (socket) => {
     // user joins a room
     socket.on('joinRoom', ({username, room}) => {
-        console.log(room)
         socket.join(room)
         rooms[room].push({id: socket.id, username})
         io.to(room).emit('newUser', {username})
         io.to(room).emit('userList', rooms[room])
-        console.log(username, 'joined', room)
         console.log(rooms[room])
     })
 
     // handle incoming messages
     socket.on('chatMessage', ({message, room, username}) => {
-        console.log(message, room, username)
-        io.to(room).emit('hello')
-        io.to(room).emit('newMessage', {message, username})
+        io.emit('newMessage', {message, username})
         console.log('updated clients with new message')
     })
 
