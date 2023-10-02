@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
     // user joins a room
     socket.on('joinRoom', ({username, room}) => {
         socket.join(room)
+        console.log(socket.rooms)
         rooms[room].push({id: socket.id, username})
         io.to(room).emit('newUser', {username})
         io.to(room).emit('userList', rooms[room])

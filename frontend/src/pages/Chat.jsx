@@ -35,9 +35,9 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on('newMessage', ({message, username}) => {
-      setMessages(prevMessages => [...prevMessages, {message,username}])
+      setMessages([...messages, {message,username}])
     })
-  }, [socket])
+  }, [socket, messages])
 
   useEffect(() => {
     socket.on('newUser', ({username}) => {
