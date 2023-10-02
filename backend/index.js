@@ -22,15 +22,14 @@ io.on('connection', (socket) => {
         socket.join(room)
         console.log(socket.rooms)
         rooms[room].push({id: socket.id, username})
-        io.to(room).emit('newUser', {username})
-        io.to(room).emit('userList', rooms[room])
+        io.emit('newUser', {username})
+        io.emit('userList', rooms[room])
         console.log(rooms[room])
     })
 
     // handle incoming messages
     socket.on('chatMessage', ({message, room, username}) => {
         io.emit('newMessage', {message, username})
-        console.log('updated clients with new message')
     })
 
     // handle user disconnects
@@ -42,14 +41,6 @@ io.on('connection', (socket) => {
                 io.emit('userList', rooms[room])
             }
         }
-    })
-
-    // handle errors
-    socket.on('error', (error) => {
-        console.log('Error occurred:', error)
-    })
-    socket.on('connect_error', (error) => {
-        console.log('Connection error occurred:', error)
     })
 })
 

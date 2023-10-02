@@ -16,9 +16,7 @@ const Chat = () => {
 
   const handleSendMessage = (e) => {
     e.preventDefault()
-    console.log('username', username)
     socket.emit('chatMessage', {message, room, username})
-    console.log('hello friend')
     setMessage('')
   }
 
@@ -48,6 +46,7 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on('userList', ({users}) => {
+      console.log(users)
       setUserList(users)
     })
   }, [socket])
