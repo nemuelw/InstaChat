@@ -20,7 +20,6 @@ io.on('connection', (socket) => {
     // user joins a room
     socket.on('joinRoom', ({username, room}) => {
         socket.join(room)
-        console.log(socket.rooms)
         rooms[room].push({id: socket.id, username})
         io.emit('newUser', {username})
         io.emit('userList', rooms[room])
@@ -29,7 +28,15 @@ io.on('connection', (socket) => {
 
     // handle incoming messages
     socket.on('chatMessage', ({message, room, username}) => {
-        io.emit('newMessage', {message, username})
+        console.log(message,room,username)
+        const rooms = io.of("/").adapter.rooms
+        if(rooms.has(room)) {
+            console.log(rooms)
+            io.to(room).emit('newMessage', {message, username})
+            console.log('message sent to all clients')
+        } else {
+            console.error('Error: Room not found')
+        }
     })
 
     // handle user disconnects
