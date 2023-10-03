@@ -8,7 +8,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 const Chat = () => {
   const {username, room} = useParams()
   const [messages, setMessages] = useState([])
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState(['None'])
   const [newUser, setNewUser] = useState([])
   const [message, setMessage] = useState('')
   const navigate = useNavigate()
@@ -24,6 +24,10 @@ const Chat = () => {
     navigate('/')
     window.location.reload()
   }
+
+  useEffect(() => {
+    console.log('User updated:', users)
+  }, [users])
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -59,6 +63,7 @@ const Chat = () => {
             <p className='text-green bg-white p-3 rounded-lg'>Active Users</p>
             <ul className='mt-2 text-white absolute right-3 px-4 py-2 overflow-y-auto border-l'>
                 {
+                    users.length > 0 ?
                     users.map((user, index) => {
                         return (
                             <>
@@ -66,7 +71,8 @@ const Chat = () => {
                                 <hr />
                             </>
                         )
-                    })
+                    }) :
+                    'None'
                 }
             </ul>
             <button

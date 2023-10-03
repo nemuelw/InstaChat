@@ -1,13 +1,13 @@
 import {Routes, Route} from 'react-router-dom'
-import JoinRoom from './pages/JoinRoom'
+import Join from './pages/Join'
 import Chat from './pages/Chat'
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={ <JoinRoom /> } />
-        <Route path='/chat/:username/:room' element={ <Chat /> } />
+        <Route path='/' element={ <Join /> } />
+        <Route path='/chat' element={ <Chat /> } />
       </Routes>
     </div>
   );

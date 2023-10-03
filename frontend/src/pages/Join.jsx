@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import io from 'socket.io-client'
 import { useNavigate } from 'react-router-dom'
 
-const JoinRoom = () => {
+const Join = () => {
   const [username, setUsername] = useState('')
-  const [room, setRoom] = useState('')
   const navigate = useNavigate()
   const socket = io.connect('http://localhost:1234')
 
   const handleJoinRoom = (e) => {
     e.preventDefault()
-    socket.emit('joinRoom', {username, room})
-    navigate(`/chat/${username}/${room}`)
+    localStorage.setItem('username', username)
+    socket.emit('join', {username})
+    navigate('/chat')
   }
 
   return (
@@ -26,15 +26,6 @@ const JoinRoom = () => {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-          <select
-            className='w-full px-3 py-4 rounded-lg text-black mb-5'
-            onChange={(e) => setRoom(e.target.value)}
-            required
-          >
-            <option value=''>Select Room to Join</option>
-            <option value='room_1'>Room 1</option>
-            <option value='room_2'>Room 2</option>
-          </select>
           <input 
             type='submit'
             value='Join Chatroom'
@@ -46,4 +37,4 @@ const JoinRoom = () => {
   )
 }
 
-export default JoinRoom
+export default Join
