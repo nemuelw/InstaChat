@@ -9,7 +9,6 @@ const Chat = () => {
   const {username, room} = useParams()
   const [messages, setMessages] = useState([])
   const [users, setUsers] = useState(['None'])
-  const [newUser, setNewUser] = useState([])
   const [message, setMessage] = useState('')
   const navigate = useNavigate()
   const socket = io.connect('http://localhost:1234')
@@ -38,16 +37,8 @@ const Chat = () => {
   useEffect(() => {
     socket.on('newMessage', ({message, username}) => {
       setMessages([...messages, {message,username}])
-      console.log('hola')
     })
   }, [socket, messages])
-
-  useEffect(() => {
-    socket.on('newUser', ({username}) => {
-      console.log(username, 'joined')
-      setNewUser(username)
-    })
-  }, [socket, newUser])
 
   useEffect(() => {
     socket.on('userList', ({users}) => {

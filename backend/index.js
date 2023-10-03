@@ -20,7 +20,6 @@ io.on('connection', (socket) => {
             // username already picked
         }
         users.push(username)
-        io.emit('newUser', {username})
         io.emit('userList', users)
     })
 

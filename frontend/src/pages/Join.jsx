@@ -28,7 +28,7 @@ const Join = () => {
           />
           <input 
             type='submit'
-            value='Join Chatroom'
+            value='Join Chat'
             className='w-full rounded-lg mb-5 bg-blue-700 py-4'
           />
         </form>
