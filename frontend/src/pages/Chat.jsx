@@ -6,16 +6,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const Chat = () => {
-  const {username, room} = useParams()
+  const username = localStorage.getItem('username')
   const [messages, setMessages] = useState([])
-  const [users, setUsers] = useState(['None'])
+  const [users, setUsers] = useState([])
   const [message, setMessage] = useState('')
   const navigate = useNavigate()
   const socket = io.connect('http://localhost:1234')
 
   const handleSendMessage = (e) => {
     e.preventDefault()
-    socket.emit('chatMessage', {message, room, username})
+    socket.emit('chatMessage', {message, username})
     setMessage('')
   }
 
@@ -25,7 +25,7 @@ const Chat = () => {
   }
 
   useEffect(() => {
-    console.log('User updated:', users)
+    console.log('Users updated:', users)
   }, [users])
 
   useEffect(() => {

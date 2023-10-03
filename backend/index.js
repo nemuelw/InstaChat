@@ -20,7 +20,8 @@ io.on('connection', (socket) => {
             // username already picked
         }
         users.push(username)
-        io.emit('userList', users)
+        console.log('Updated users list:', users)
+        io.emit('userList', {users})
     })
 
     // handle incoming messages
@@ -30,7 +31,7 @@ io.on('connection', (socket) => {
 
     // handle user disconnects
     socket.on('disconnect', () => {
-        console.log('user disconnected')
+        console.log('A user disconnected')
     })
 })
 
