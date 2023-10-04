@@ -40,7 +40,7 @@ git clone https://github.com/nemzyxt/InstaChat.git
 npm install
 ```
 
-- Navigate to the frontend directory and run this command to install dependencies
+- Navigate to the backend directory and run this command to install dependencies
 
 ```
 npm install
@@ -60,6 +60,6 @@ npm start
 npm start
 ```
 
-- Open the provided URL on separate browser windows
-- Join a similar room in both cases (using different usernames)
-- You can now send messages to and fro and see them appear on the other window in realtime
+- Open the provided URL on separate browser tabs
+- Join the chat using different usernames
+- You can now send messages to and fro and see them appear on the other tab in realtime
