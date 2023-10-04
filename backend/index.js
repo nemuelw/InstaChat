@@ -22,9 +22,7 @@ io.on('connection', (socket) => {
         } else {
             users.add(username)
             socket.emit('joinSuccess')
-            
             io.emit('userList', {users: Array.from(users)})
-            socket.emit('userList', {users: Array.from(users)})
         }
     })
 

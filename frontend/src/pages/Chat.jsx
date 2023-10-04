@@ -39,7 +39,6 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on('userList', ({users}) => {
-      console.log(users)
       setUsers(users)
     })
   }, [])
