@@ -62,4 +62,4 @@ npm start
 
 - Open the provided URL on separate browser tabs
 - Join the chat using different usernames
-- You can now send messages to and fro and see them appear on the other tab in realtime
+- You can now send messages to and fro and see them appear on the other tab(s) in realtime
