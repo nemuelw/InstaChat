@@ -29,19 +29,19 @@ const Chat = () => {
     socket.on('connect', () => {
       console.log('Client connected')
     })
-  }, [])
+  }, [socket])
 
   useEffect(() => {
     socket.on('newMessage', ({message, username}) => {
       setMessages([...messages, {message,username}])
     })
-  }, [])
+  }, [messages, socket])
 
   useEffect(() => {
     socket.on('userList', ({users}) => {
       setUsers(users)
     })
-  }, [])
+  }, [users, socket])
 
   return (
     <div className='flex items-center justify-center h-screen'>
