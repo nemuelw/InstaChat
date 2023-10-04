@@ -46,6 +46,8 @@ npm install
 npm install
 ```
 
+- Optionally update `.env` in the frontend directory as appropriate
+
 ## Usage
 
 - Navigate to the backend directory and run this command to start the server
