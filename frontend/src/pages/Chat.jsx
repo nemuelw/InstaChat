@@ -4,14 +4,15 @@ import io from 'socket.io-client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
-const Chat = () => {
+const Chat = (props) => {
+  const {serverUrl} = props
   const username = sessionStorage.getItem('username')
   const [messages, setMessages] = useState([])
   const [users, setUsers] = useState([])
   const [message, setMessage] = useState('')
   const msgRef = useRef(null)
   const navigate = useNavigate()
-  const socket = io.connect('http://localhost:1234')
+  const socket = io.connect(serverUrl)
 
   const handleSendMessage = (e) => {
     e.preventDefault()

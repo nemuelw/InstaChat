@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import io from 'socket.io-client'
 import { useNavigate } from 'react-router-dom'
 
-const Join = () => {
+const Join = (props) => {
+  const {serverUrl} = props
   const [username, setUsername] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate()
-  const socket = io.connect('http://localhost:1234')
+  const socket = io.connect(serverUrl)
 
   const handleJoinRoom = (e) => {
     e.preventDefault()
