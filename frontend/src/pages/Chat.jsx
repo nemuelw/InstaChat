@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import io from 'socket.io-client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,6 +9,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([])
   const [users, setUsers] = useState([])
   const [message, setMessage] = useState('')
+  const msgRef = useRef(null)
   const navigate = useNavigate()
   const socket = io.connect('http://localhost:1234')
 
@@ -16,6 +17,7 @@ const Chat = () => {
     e.preventDefault()
     socket.emit('chatMessage', {message, username})
     setMessage('')
+    msgRef.current.value = ''
   }
 
   const handleLeaveRoom = () => {
@@ -24,27 +26,23 @@ const Chat = () => {
   }
 
   useEffect(() => {
-    console.log('Users updated:', users)
-  }, [users])
-
-  useEffect(() => {
     socket.on('connect', () => {
       console.log('Client connected')
     })
-  }, [socket])
+  }, [])
 
   useEffect(() => {
     socket.on('newMessage', ({message, username}) => {
       setMessages([...messages, {message,username}])
     })
-  }, [socket, messages])
+  }, [])
 
   useEffect(() => {
     socket.on('userList', ({users}) => {
       console.log(users)
       setUsers(users)
     })
-  }, [socket, users])
+  }, [])
 
   return (
     <div className='flex items-center justify-center h-screen'>
@@ -57,7 +55,7 @@ const Chat = () => {
                     users.map((user, index) => {
                         return (
                             <>
-                                <li key={index} className='text-xl'>{user === username ? `${user}(You)` : user}</li>
+                                <li key={index} className='text-sm'>{user === username ? `${user}(You)` : user}</li>
                                 <hr />
                             </>
                         )
@@ -91,6 +89,7 @@ const Chat = () => {
             <form className='flex absolute bottom-2 items-center' onSubmit={handleSendMessage}>
                 <input 
                     type="text"
+                    ref={msgRef}
                     className='border border-purple-900 rounded-lg focus:outline-none p-2'
                     placeholder='Type your message ...'
                     onChange={(e) => setMessage(e.target.value)}

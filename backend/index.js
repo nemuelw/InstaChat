@@ -22,10 +22,9 @@ io.on('connection', (socket) => {
         } else {
             users.add(username)
             socket.emit('joinSuccess')
-            console.log('Updated users list:', users)
-            io.emit('userList', {users})
-            socket.emit('userList', {users})
-            console.log('update to user sent')
+            
+            io.emit('userList', {users: Array.from(users)})
+            socket.emit('userList', {users: Array.from(users)})
         }
     })
 
