@@ -4,20 +4,29 @@ import { useNavigate } from 'react-router-dom'
 
 const Join = () => {
   const [username, setUsername] = useState('')
+  const [error, setError] = useState('')
   const navigate = useNavigate()
   const socket = io.connect('http://localhost:1234')
 
   const handleJoinRoom = (e) => {
     e.preventDefault()
-    localStorage.setItem('username', username)
     socket.emit('join', {username})
-    navigate('/chat')
   }
+
+  socket.on('joinSuccess', () => {
+    sessionStorage.setItem('username', username)
+    navigate('/chat')
+  })
+
+  socket.on('usernameError', () => {
+    setError('Username has already been picked')
+  })
 
   return (
     <div className='flex items-center justify-center h-screen'>
       <div className='bg-purple-500 rounded-md p-3 text-white text-center w-1/3'>
         <p className='mb-3 text-2xl'>InstaChat</p>
+        <p className='text-sm text-red'>{error}</p>
         <form className='w-full' onSubmit={handleJoinRoom}>
           <input 
             type="text"

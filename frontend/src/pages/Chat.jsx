@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import io from 'socket.io-client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 const Chat = () => {
-  const username = localStorage.getItem('username')
+  const username = sessionStorage.getItem('username')
   const [messages, setMessages] = useState([])
   const [users, setUsers] = useState([])
   const [message, setMessage] = useState('')
@@ -45,7 +44,7 @@ const Chat = () => {
       console.log(users)
       setUsers(users)
     })
-  }, [socket])
+  }, [socket, users])
 
   return (
     <div className='flex items-center justify-center h-screen'>

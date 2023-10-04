@@ -11,17 +11,22 @@ const io = socketIo(server, {
 })
 
 // users
-users = []
+users = new Set()
 
 io.on('connection', (socket) => {
-    // user joins a room
+    // user joins the chat
     socket.on('join', ({username}) => {
-        if(username in users) {
+        if(users.has(username)) {
             // username already picked
+            socket.emit('usernameError')
+        } else {
+            users.add(username)
+            socket.emit('joinSuccess')
+            console.log('Updated users list:', users)
+            io.emit('userList', {users})
+            socket.emit('userList', {users})
+            console.log('update to user sent')
         }
-        users.push(username)
-        console.log('Updated users list:', users)
-        io.emit('userList', {users})
     })
 
     // handle incoming messages
