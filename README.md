@@ -13,6 +13,19 @@ Full-stack realtime chat app
 - NodeJS
 - Express
 
+## Screenshots
+
+User 1 joins \
+![img](https://github.com/nemzyxt/InstaChat/blob/main/scrshots/pic1.png)
+User 2 joins \
+![img](https://github.com/nemzyxt/InstaChat/blob/main/scrshots/pic2.png)
+Updated users list \
+![img](https://github.com/nemzyxt/InstaChat/blob/main/scrshots/pic3.png)
+User 1 sends a message \
+![img](https://github.com/nemzyxt/InstaChat/blob/main/scrshots/pic4.png)
+User 2 responds \
+![img](https://github.com/nemzyxt/InstaChat/blob/main/scrshots/pic5.png)
+
 ## Setup
 
 - Clone this repository
